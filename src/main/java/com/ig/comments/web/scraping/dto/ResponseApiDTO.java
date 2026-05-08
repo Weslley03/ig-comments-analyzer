@@ -1,4 +1,4 @@
-package com.ig.comments.web.scraping.demo.dto;
+package com.ig.comments.web.scraping.dto;
 
 public class ResponseApiDTO<T> {
     private int status;

@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ig.comments.web.scraping</groupId>
-	<artifactId>demo</artifactId>
+	<artifactId>ig-scraper-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
+	<name>ig-scraper-api</name>
 	<description/>
 	<url/>
 	<licenses>

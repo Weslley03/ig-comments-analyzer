@@ -1,7 +1,7 @@
-package com.ig.comments.web.scraping.demo.service;
+package com.ig.comments.web.scraping.service;
 
-import com.ig.comments.web.scraping.demo.component.InstagramBrowserClient;
-import com.ig.comments.web.scraping.demo.dto.InstagramPostDataDTO;
+import com.ig.comments.web.scraping.component.InstagramBrowserClient;
+import com.ig.comments.web.scraping.dto.InstagramPostDataDTO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

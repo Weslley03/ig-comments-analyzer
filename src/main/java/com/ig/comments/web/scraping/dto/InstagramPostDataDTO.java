@@ -1,4 +1,4 @@
-package com.ig.comments.web.scraping.demo.dto;
+package com.ig.comments.web.scraping.dto;
 
 import java.util.List;
 

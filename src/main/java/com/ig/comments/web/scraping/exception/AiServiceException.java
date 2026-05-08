@@ -1,4 +1,4 @@
-package com.ig.comments.web.scraping.demo.exception;
+package com.ig.comments.web.scraping.exception;
 
 public class AiServiceException extends RuntimeException {
     public AiServiceException(String message) {

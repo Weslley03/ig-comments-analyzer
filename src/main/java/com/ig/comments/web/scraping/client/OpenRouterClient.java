@@ -1,4 +1,4 @@
-package com.ig.comments.web.scraping.demo.client;
+package com.ig.comments.web.scraping.client;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,8 +17,8 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
-import com.ig.comments.web.scraping.demo.dto.OpenRouterDTO.OpenRouterResponse;
-import com.ig.comments.web.scraping.demo.exception.AiServiceException;
+import com.ig.comments.web.scraping.dto.OpenRouterDTO.OpenRouterResponse;
+import com.ig.comments.web.scraping.exception.AiServiceException;
 
 @Component
 public class OpenRouterClient {
@@ -36,8 +36,8 @@ public class OpenRouterClient {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(apiKey);
-        headers.add("HTTP-Referer", "https://ig-comments-web-scraping-demo.com");
-        headers.add("X-OpenRouter-Title", "ig-comments-web-scraping-demo");
+        headers.add("HTTP-Referer", "https://github.com/Weslley03/ig-comments-analyzer");
+        headers.add("X-OpenRouter-Title", "ig-scraper-api-v1");
 
         Map<String, Object> body = new HashMap<>();
         body.put("model", "openai/gpt-4o-mini");

@@ -1,8 +1,8 @@
-package com.ig.comments.web.scraping.demo.controller;
+package com.ig.comments.web.scraping.controller;
 
-import com.ig.comments.web.scraping.demo.dto.ResponseApiDTO;
-import com.ig.comments.web.scraping.demo.exception.InvalidUrlException;
-import com.ig.comments.web.scraping.demo.service.InstagramScraperService;
+import com.ig.comments.web.scraping.dto.ResponseApiDTO;
+import com.ig.comments.web.scraping.exception.InvalidUrlException;
+import com.ig.comments.web.scraping.service.InstagramScraperService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

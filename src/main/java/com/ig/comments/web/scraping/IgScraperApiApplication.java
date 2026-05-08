@@ -1,13 +1,13 @@
-package com.ig.comments.web.scraping.demo;
+package com.ig.comments.web.scraping;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoApplication {
+public class IgScraperApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(IgScraperApiApplication.class, args);
 	}
 
 }

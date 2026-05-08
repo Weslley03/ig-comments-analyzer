@@ -1,6 +1,6 @@
-package com.ig.comments.web.scraping.demo.exception;
+package com.ig.comments.web.scraping.exception;
 
-import com.ig.comments.web.scraping.demo.dto.ResponseApiDTO;
+import com.ig.comments.web.scraping.dto.ResponseApiDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

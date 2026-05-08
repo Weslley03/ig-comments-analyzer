@@ -1,7 +1,7 @@
-package com.ig.comments.web.scraping.demo.component;
+package com.ig.comments.web.scraping.component;
 
-import com.ig.comments.web.scraping.demo.dto.InstagramPostDataDTO;
-import com.ig.comments.web.scraping.demo.exception.ScrapingException;
+import com.ig.comments.web.scraping.dto.InstagramPostDataDTO;
+import com.ig.comments.web.scraping.exception.ScrapingException;
 import com.microsoft.playwright.*;
 
 import java.util.ArrayList;

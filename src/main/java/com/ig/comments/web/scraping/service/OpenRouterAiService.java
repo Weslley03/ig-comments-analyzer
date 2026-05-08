@@ -1,9 +1,9 @@
-package com.ig.comments.web.scraping.demo.service;
+package com.ig.comments.web.scraping.service;
 
 import org.springframework.stereotype.Service;
 
-import com.ig.comments.web.scraping.demo.client.OpenRouterClient;
-import com.ig.comments.web.scraping.demo.dto.InstagramPostDataDTO;
+import com.ig.comments.web.scraping.client.OpenRouterClient;
+import com.ig.comments.web.scraping.dto.InstagramPostDataDTO;
 
 @Service
 public class OpenRouterAiService {

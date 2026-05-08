@@ -1,10 +1,10 @@
-package com.ig.comments.web.scraping.demo;
+package com.ig.comments.web.scraping;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoApplicationTests {
+class IgScraperApiApplicationTests {
 
 	@Test
 	void contextLoads() {
