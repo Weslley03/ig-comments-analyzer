@@ -1,6 +1,7 @@
 package com.ig.comments.web.scraping.security;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -43,13 +44,21 @@ public class JwtService {
         return getClaims(token).get("role", String.class);
     }
 
-    public boolean isTokenValid(String token) {
+    public enum TokenStatus { VALID, EXPIRED, INVALID }
+
+    public TokenStatus getTokenStatus(String token) {
         try {
             getClaims(token);
-            return true;
+            return TokenStatus.VALID;
+        } catch (ExpiredJwtException e) {
+            return TokenStatus.EXPIRED;
         } catch (JwtException | IllegalArgumentException e) {
-            return false;
+            return TokenStatus.INVALID;
         }
+    }
+
+    public boolean isTokenValid(String token) {
+        return getTokenStatus(token) == TokenStatus.VALID;
     }
 
     private Claims getClaims(String token) {
