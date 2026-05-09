@@ -1,5 +1,7 @@
 # ignorar application.properties real
 src/main/resources/application.properties
+src/main/resources/application-local.properties
+src/main/resources/application-prod.properties
 
 HELP.md
 target/

@@ -7,7 +7,8 @@ import com.ig.comments.web.scraping.dto.InstagramPostDataDTO;
 
 @Service
 public class OpenRouterAiService {
-private final OpenRouterClient client;
+
+    private final OpenRouterClient client;
 
     public OpenRouterAiService(OpenRouterClient client) {
         this.client = client;

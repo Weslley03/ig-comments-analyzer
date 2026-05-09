@@ -2,7 +2,11 @@ package com.ig.comments.web.scraping.component;
 
 import com.ig.comments.web.scraping.dto.InstagramPostDataDTO;
 import com.ig.comments.web.scraping.exception.ScrapingException;
-import com.microsoft.playwright.*;
+import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.BrowserType;
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Playwright;
 
 import java.util.ArrayList;
 import java.util.List;
