@@ -1,6 +1,7 @@
 package com.ig.comments.web.scraping.controller;
 
 import com.ig.comments.web.scraping.dto.AssignPlanRequestDTO;
+import com.ig.comments.web.scraping.dto.ResponseApiDTO;
 import com.ig.comments.web.scraping.dto.UserPlanResponseDTO;
 import com.ig.comments.web.scraping.model.User;
 import com.ig.comments.web.scraping.service.UserPlanService;
@@ -29,13 +30,27 @@ public class UserPlanController {
     }
 
     @PostMapping
-    public ResponseEntity<UserPlanResponseDTO> assign(@AuthenticationPrincipal User user, @Valid @RequestBody AssignPlanRequestDTO dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userPlanService.assign(user.getId(), dto));
+    public ResponseEntity<ResponseApiDTO<UserPlanResponseDTO>> assign(@AuthenticationPrincipal User user, @Valid @RequestBody AssignPlanRequestDTO dto) {
+        UserPlanResponseDTO userPlanResponseDTO = userPlanService.assign(user.getId(), dto);
+        return ResponseEntity.ok(new ResponseApiDTO<UserPlanResponseDTO>(
+            HttpStatus.CREATED.value(),
+            String.format(
+                "plano %s associado ao usuário %s.",
+                userPlanResponseDTO.planRole(),
+                userPlanResponseDTO.userId()
+            ),
+            userPlanResponseDTO
+        ));
     }
 
     @GetMapping("/me")
-    public ResponseEntity<List<UserPlanResponseDTO>> listMyPlans(@AuthenticationPrincipal User user) {
-        return ResponseEntity.ok(userPlanService.listByUser(user.getId()));
+    public ResponseEntity<ResponseApiDTO<List<UserPlanResponseDTO>>> listMyPlans(@AuthenticationPrincipal User user) {
+        List<UserPlanResponseDTO> userPlanResponseDTO = userPlanService.listByUser(user.getId());
+        return ResponseEntity.ok(new ResponseApiDTO<List<UserPlanResponseDTO>>(
+            HttpStatus.OK.value(),
+            "lista de planos do usuário recuperada.",
+            userPlanResponseDTO
+        ));
     }
 
     @GetMapping("/{userId}")

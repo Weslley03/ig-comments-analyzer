@@ -3,6 +3,7 @@ package com.ig.comments.web.scraping.controller;
 import com.ig.comments.web.scraping.dto.AuthResponseDTO;
 import com.ig.comments.web.scraping.dto.LoginRequestDTO;
 import com.ig.comments.web.scraping.dto.RegisterRequestDTO;
+import com.ig.comments.web.scraping.dto.ResponseApiDTO;
 import com.ig.comments.web.scraping.service.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -23,12 +24,22 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponseDTO> register(@Valid @RequestBody RegisterRequestDTO dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(dto));
+    public ResponseEntity<ResponseApiDTO<AuthResponseDTO>> register(@Valid @RequestBody RegisterRequestDTO dto) {
+        AuthResponseDTO authResponseDTO = authService.register(dto);
+        return ResponseEntity.ok(new ResponseApiDTO<AuthResponseDTO>(
+            HttpStatus.CREATED.value(),
+            "cadastro do usuário efetuado com sucesso!",
+                authResponseDTO
+        ));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponseDTO> login(@Valid @RequestBody LoginRequestDTO dto) {
-        return ResponseEntity.ok(authService.login(dto));
+    public ResponseEntity<ResponseApiDTO<AuthResponseDTO>> login(@Valid @RequestBody LoginRequestDTO dto) {
+        AuthResponseDTO authResponseDTO = authService.login(dto);
+        return ResponseEntity.ok(new ResponseApiDTO<AuthResponseDTO>(
+            HttpStatus.OK.value(),
+            "usuário autenticado com sucesso!",
+            authResponseDTO
+        ));
     }
 }
