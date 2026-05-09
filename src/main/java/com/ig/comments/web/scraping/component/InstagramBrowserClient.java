@@ -23,7 +23,6 @@ public class InstagramBrowserClient {
     private static final int INITIAL_PAGE_WAIT = 5000;
     private static final int MODAL_WAIT = 2000;
     private static final int SCROLL_WAIT = 1500;
-    private static final int MAX_SCROLLS = 20;
     private static final int SCROLL_DISTANCE = 800;
 
     private static final String COMMENTS_SPAN_SELECTOR = "span[dir='auto']";
@@ -73,7 +72,7 @@ public class InstagramBrowserClient {
             }
             """;
 
-    public InstagramPostDataDTO extractPostData(String url) {
+    public InstagramPostDataDTO extractPostData(String url, int maxScrolls) {
         try (
             Playwright playwright = Playwright.create();
             Browser browser = createBrowser(playwright)
@@ -81,7 +80,7 @@ public class InstagramBrowserClient {
             Page page = browser.newPage();
             openPost(page, url);
             closeGuestModal(page);
-            loadAllComments(page);
+            loadAllComments(page, maxScrolls);
 
             String description = extractDescription(page);
             List<String> comments = collectComments(page);
@@ -107,12 +106,12 @@ public class InstagramBrowserClient {
         return result != null ? result.toString() : "";
     }
 
-    public List<String> extractComments(String url) {
-        return extractPostData(url).comments();
+    public List<String> extractComments(String url, int maxScrolls) {
+        return extractPostData(url, maxScrolls).comments();
     }
 
     private Browser createBrowser(Playwright playwright) {
-        return playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        return playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(true));
     }
 
     private void openPost(Page page, String url) {
@@ -129,7 +128,7 @@ public class InstagramBrowserClient {
         }
     }
 
-    private void loadAllComments(Page page) {
+    private void loadAllComments(Page page, int maxScrolls) {
         Locator scrollArea = page.locator(COMMENTS_SCROLL_SELECTOR);
 
         if (scrollArea.count() == 0) {
@@ -142,7 +141,7 @@ public class InstagramBrowserClient {
         int attemptsWithoutGrowth = 0;
         int maxAttemptsWithoutGrowth = 3;
 
-        while (scrollCount < MAX_SCROLLS && attemptsWithoutGrowth < maxAttemptsWithoutGrowth) {
+        while (scrollCount < maxScrolls && attemptsWithoutGrowth < maxAttemptsWithoutGrowth) {
             int oldHeight = getScrollHeight(area);
 
             scrollDown(area);

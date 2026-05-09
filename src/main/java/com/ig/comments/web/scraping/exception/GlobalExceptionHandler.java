@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,6 +18,25 @@ import java.time.OffsetDateTime;
 public class GlobalExceptionHandler {
 
     private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
+    @ExceptionHandler(InsufficientCreditsException.class)
+    public ResponseEntity<ResponseApiDTO<Void>> handleInsufficientCredits(InsufficientCreditsException ex) {
+        log.warn("insufficient credits: {}", ex.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.PAYMENT_REQUIRED)
+                .body(new ResponseApiDTO<>(HttpStatus.PAYMENT_REQUIRED.value(), ex.getMessage()));
+    }
+
+    @ExceptionHandler(BindException.class)
+    public ResponseEntity<ErrorResponseDTO> handleBind(BindException ex) {
+        String message = ex.getBindingResult().getFieldErrors().stream()
+                .map(fe -> fe.getDefaultMessage())
+                .findFirst()
+                .orElse("erro de validação.");
+        log.warn("bind validation failed: {}", message);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(error(HttpStatus.BAD_REQUEST, message));
+    }
 
     @ExceptionHandler(EmailAlreadyExistsException.class)
     public ResponseEntity<ErrorResponseDTO> handleEmailAlreadyExists(EmailAlreadyExistsException ex) {
