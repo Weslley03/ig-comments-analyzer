@@ -1,7 +1,0 @@
-package com.ig.comments.web.scraping.demo.exception;
-
-public class InvalidUrlException extends RuntimeException {
-    public InvalidUrlException(String message) {
-        super(message);
-    }
-}
